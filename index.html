@@ -234,36 +234,83 @@
             color: #00ff88;
         }
         form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
         label {
             color: #00ff88;
             font-weight: bold;
+            font-size: 1.1em;
         }
         input, select, textarea {
-            padding: 10px;
-            border: 1px solid #00ff88;
+            padding: 12px;
+            border: 2px solid #00ff88;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: all 0.3s;
+            font-size: 1em;
+            width: 100%;
+            min-height: 45px;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
         }
         input:focus, select:focus, textarea:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            border-color: #00cc6a;
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .submit-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-button {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #1a1a2e;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+        .submit-button:active {
+            transform: translateY(0);
         }
         .success-message {
             display: none;
             color: #00ff88;
             font-size: 1.2em;
             margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            border: 1px solid #00ff88;
         }
         footer {
             width: 100%;
@@ -357,15 +404,15 @@
             <form id="joinForm" onsubmit="return handleSubmit(event)">
                 <div class="form-group">
                     <label>姓名：</label>
-                    <input type="text" required>
+                    <input type="text" name="name" required placeholder="请输入您的姓名">
                 </div>
                 <div class="form-group">
                     <label>班级：</label>
-                    <input type="text" required>
+                    <input type="text" name="class" required placeholder="请输入您的班级">
                 </div>
                 <div class="form-group">
                     <label>性别：</label>
-                    <select required>
+                    <select name="gender" required>
                         <option value="">请选择</option>
                         <option value="male">男</option>
                         <option value="female">女</option>
@@ -373,37 +420,39 @@
                 </div>
                 <div class="form-group">
                     <label>年龄：</label>
-                    <input type="number" required>
+                    <input type="number" name="age" required placeholder="请输入您的年龄">
                 </div>
                 <div class="form-group">
                     <label>专业：</label>
-                    <input type="text" required>
+                    <input type="text" name="major" required placeholder="请输入您的专业">
                 </div>
                 <div class="form-group">
                     <label>联系方式：</label>
-                    <input type="tel" required>
+                    <input type="tel" name="phone" required placeholder="请输入您的手机号码">
                 </div>
                 <div class="form-group">
                     <label>邮箱：</label>
-                    <input type="email" required>
+                    <input type="email" name="email" required placeholder="请输入您的邮箱地址">
                 </div>
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label>能力与才艺：</label>
-                    <textarea rows="3" required></textarea>
+                    <textarea name="skills" required placeholder="请描述您的能力与才艺"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label>电脑技能：</label>
-                    <textarea rows="3" required></textarea>
+                    <textarea name="computerSkills" required placeholder="请描述您的电脑技能"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label>获奖经历：</label>
-                    <textarea rows="3"></textarea>
+                    <textarea name="awards" placeholder="请描述您的获奖经历（如有）"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label>项目经验：</label>
-                    <textarea rows="3"></textarea>
+                    <textarea name="projects" placeholder="请描述您的项目经验（如有）"></textarea>
                 </div>
-                <button type="submit" class="button">提交申请</button>
+                <div class="submit-container">
+                    <button type="submit" class="submit-button">提交申请</button>
+                </div>
             </form>
             <div id="successMessage" class="success-message">
                 申请已提交，请等待回复！
@@ -480,8 +529,24 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            // 这里可以添加发送数据的代码
-            console.log('Form submitted:', data);
+            // 构建邮件内容
+            const mailtoLink = `mailto:happy_games@vip.qq.com?subject=游戏社团新成员申请&body=${encodeURIComponent(
+                `新成员申请信息：\n\n` +
+                `姓名：${data.name}\n` +
+                `班级：${data.class}\n` +
+                `性别：${data.gender === 'male' ? '男' : '女'}\n` +
+                `年龄：${data.age}\n` +
+                `专业：${data.major}\n` +
+                `联系方式：${data.phone}\n` +
+                `邮箱：${data.email}\n\n` +
+                `能力与才艺：\n${data.skills}\n\n` +
+                `电脑技能：\n${data.computerSkills}\n\n` +
+                `获奖经历：\n${data.awards || '无'}\n\n` +
+                `项目经验：\n${data.projects || '无'}`
+            )}`;
+            
+            // 打开默认邮件客户端
+            window.location.href = mailtoLink;
             
             // 显示成功消息
             document.getElementById('successMessage').style.display = 'block';
