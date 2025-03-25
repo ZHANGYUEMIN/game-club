@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>游戏社团官网</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -19,6 +20,16 @@
             color: white;
             text-align: center;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
         header {
             width: 100%;
@@ -30,6 +41,7 @@
             position: fixed;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         nav {
             width: 100%;
@@ -41,15 +53,28 @@
             position: fixed;
             top: 60px;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         nav a {
             color: white;
             text-decoration: none;
             font-size: 1.2em;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 10px;
         }
-        nav a:hover {
-            color: #00ff88;
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff88;
+            transition: width 0.3s;
+        }
+        nav a:hover::after {
+            width: 100%;
         }
         .container {
             max-width: 1000px;
@@ -58,16 +83,20 @@
             margin-top: 120px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, background 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
         }
         .container:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
             background: rgba(0, 0, 0, 0.7);
         }
         h1 {
             font-size: 2.8em;
             margin-bottom: 10px;
             color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
         p {
             font-size: 1.2em;
@@ -79,33 +108,59 @@
             background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        .section:hover {
+            transform: scale(1.02);
+            background: rgba(0, 0, 0, 0.6);
         }
         .button {
             display: inline-block;
             margin-top: 20px;
             padding: 12px 24px;
-            background: #00ff88;
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
             color: #1a1a2e;
             text-decoration: none;
             border-radius: 8px;
-            transition: background 0.3s, transform 0.3s;
+            transition: all 0.3s;
             font-size: 1.2em;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .button:hover::before {
+            left: 100%;
         }
         .button:hover {
-            background: #00cc6a;
             transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
         }
         .page {
             display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
         .active {
             display: block;
+            opacity: 1;
         }
         .features {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
+            gap: 20px;
         }
         .feature-box {
             width: 30%;
@@ -114,26 +169,93 @@
             margin: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            position: relative;
+            background: rgba(0, 0, 0, 0.9);
+            margin: 5% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #00ff88;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        label {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #00ff88;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        .success-message {
+            display: none;
+            color: #00ff88;
+            font-size: 1.2em;
+            margin-top: 20px;
         }
         footer {
             width: 100%;
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
-            position: fixed;
-            bottom: 0;
             text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+        .announcement {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #ff0000;
         }
     </style>
-    <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-    </script>
 </head>
 <body>
+    <div id="particles-js"></div>
     <header>游戏社团官网</header>
     <nav>
         <a href="#" onclick="showPage('home')">首页</a>
@@ -148,68 +270,200 @@
             <p>这里是游戏爱好者的天堂，我们有丰富的社团活动和比赛，快来加入我们吧！</p>
             <div class="features">
                 <div class="feature-box">
-                    <h2>电竞比赛</h2>
-                    <p>定期举办各类游戏比赛，展示你的游戏技巧。</p>
+                    <h2>🎮 电竞比赛</h2>
+                    <p>定期举办各类游戏比赛，展示你的游戏技巧。参与比赛还有机会获得丰厚奖励！</p>
                 </div>
                 <div class="feature-box">
-                    <h2>游戏交流</h2>
-                    <p>与志同道合的玩家交流经验，分享游戏心得。</p>
+                    <h2>🎯 游戏交流</h2>
+                    <p>与志同道合的玩家交流经验，分享游戏心得。在这里，你可以找到最棒的队友！</p>
                 </div>
                 <div class="feature-box">
-                    <h2>技术培训</h2>
-                    <p>提供游戏开发、直播技术等专业培训。</p>
+                    <h2>💻 技术培训</h2>
+                    <p>提供游戏开发、直播技术等专业培训。让你的游戏技能更上一层楼！</p>
                 </div>
             </div>
-            <a href="#" class="button" onclick="showPage('join')">立即加入</a>
+            <button class="button" onclick="showPage('join')">立即加入</button>
         </div>
     </div>
     <div id="about" class="page">
         <div class="container">
             <h1>关于我们</h1>
-            <p>游戏社团成立于2020年，是一个充满活力的游戏爱好者社区。我们致力于为游戏爱好者提供一个交流、学习和展示的平台。</p>
+            <div class="section">
+                <h2>社团简介</h2>
+                <p>游戏社团成立于2020年，是一个充满活力的游戏爱好者社区。我们致力于为游戏爱好者提供一个交流、学习和展示的平台。</p>
+            </div>
+            <div class="section">
+                <h2>社团理念</h2>
+                <p>我们相信游戏不仅仅是娱乐，更是一种艺术和文化的表达。在这里，我们鼓励创新思维，培养团队协作，提升技术能力。</p>
+            </div>
+            <div class="section">
+                <h2>发展历程</h2>
+                <p>2020年：社团成立</p>
+                <p>2021年：举办首届校园电竞大赛</p>
+                <p>2022年：成立游戏开发小组</p>
+                <p>2023年：获得"最佳社团"称号</p>
+                <p>2024年：举办全国高校电竞联赛</p>
+            </div>
         </div>
     </div>
     <div id="activities" class="page">
         <div class="container">
             <h1>社团活动</h1>
-            <p>我们定期举办各类活动：</p>
-            <ul style="list-style: none; margin-top: 20px;">
-                <li>每周游戏交流会</li>
-                <li>月度电竞比赛</li>
-                <li>游戏开发工作坊</li>
-                <li>直播技术培训</li>
-            </ul>
+            <div class="announcement">
+                <h3>🎉 最新公告</h3>
+                <p>2024年校园电竞大赛即将开始，报名通道已开启！</p>
+            </div>
+            <div class="section">
+                <h2>近期活动</h2>
+                <ul style="list-style: none; margin-top: 20px;">
+                    <li>每周五：游戏交流会</li>
+                    <li>每月第一个周末：月度电竞比赛</li>
+                    <li>每月第二个周末：游戏开发工作坊</li>
+                    <li>每月第三个周末：直播技术培训</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>活动回顾</h2>
+                <p>上个月的电竞比赛圆满结束，共有50支队伍参与，最终"王者战队"获得冠军！</p>
+            </div>
         </div>
     </div>
     <div id="join" class="page">
         <div class="container">
             <h1>加入我们</h1>
-            <p>填写以下信息加入社团：</p>
-            <form style="margin-top: 20px; text-align: left;">
-                <div style="margin: 10px 0;">
+            <form id="joinForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group">
                     <label>姓名：</label>
-                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                    <input type="text" required>
                 </div>
-                <div style="margin: 10px 0;">
-                    <label>学号：</label>
-                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                <div class="form-group">
+                    <label>班级：</label>
+                    <input type="text" required>
                 </div>
-                <div style="margin: 10px 0;">
+                <div class="form-group">
+                    <label>性别：</label>
+                    <select required>
+                        <option value="">请选择</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>年龄：</label>
+                    <input type="number" required>
+                </div>
+                <div class="form-group">
+                    <label>专业：</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
                     <label>联系方式：</label>
-                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                    <input type="tel" required>
                 </div>
-                <button type="submit" class="button" style="margin-top: 20px;">提交申请</button>
+                <div class="form-group">
+                    <label>邮箱：</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>能力与才艺：</label>
+                    <textarea rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>电脑技能：</label>
+                    <textarea rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>获奖经历：</label>
+                    <textarea rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>项目经验：</label>
+                    <textarea rows="3"></textarea>
+                </div>
+                <button type="submit" class="button">提交申请</button>
             </form>
+            <div id="successMessage" class="success-message">
+                申请已提交，请等待回复！
+            </div>
         </div>
     </div>
     <div id="contact" class="page">
         <div class="container">
             <h1>联系我们</h1>
-            <p>邮箱：gameclub@example.com</p>
-            <p>QQ群：123456789</p>
-            <p>微信公众号：游戏社团</p>
+            <div class="section">
+                <h2>联系方式</h2>
+                <p>邮箱：2522185191@qq.com</p>
+                <p>QQ群：123456789</p>
+                <p>微信公众号：游戏社团</p>
+            </div>
+            <div class="section">
+                <h2>关注我们</h2>
+                <p>扫描下方二维码加入QQ群</p>
+                <p>（二维码图片）</p>
+            </div>
         </div>
     </div>
     <footer>版权所有 &copy; 2025 游戏社团</footer>
+
+    <script>
+        // 粒子效果配置
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff88' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00ff88',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // 这里可以添加发送数据的代码
+            console.log('Form submitted:', data);
+            
+            // 显示成功消息
+            document.getElementById('successMessage').style.display = 'block';
+            form.reset();
+            
+            return false;
+        }
+    </script>
 </body>
 </html>
