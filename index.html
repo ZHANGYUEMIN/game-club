@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>游戏社团官网</title>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -523,34 +524,50 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        (function() {
+            emailjs.init("BCOnltrsEOASXxfwB"); // 需要替换为您的EmailJS公钥
+        })();
+
         function handleSubmit(event) {
             event.preventDefault();
             const form = event.target;
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            // 构建邮件内容
-            const mailtoLink = `mailto:happy_games@vip.qq.com?subject=游戏社团新成员申请&body=${encodeURIComponent(
-                `新成员申请信息：\n\n` +
-                `姓名：${data.name}\n` +
-                `班级：${data.class}\n` +
-                `性别：${data.gender === 'male' ? '男' : '女'}\n` +
-                `年龄：${data.age}\n` +
-                `专业：${data.major}\n` +
-                `联系方式：${data.phone}\n` +
-                `邮箱：${data.email}\n\n` +
-                `能力与才艺：\n${data.skills}\n\n` +
-                `电脑技能：\n${data.computerSkills}\n\n` +
-                `获奖经历：\n${data.awards || '无'}\n\n` +
-                `项目经验：\n${data.projects || '无'}`
-            )}`;
+            // 显示加载状态
+            const submitButton = form.querySelector('.submit-button');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = '提交中...';
+            submitButton.disabled = true;
             
-            // 打开默认邮件客户端
-            window.location.href = mailtoLink;
-            
-            // 显示成功消息
-            document.getElementById('successMessage').style.display = 'block';
-            form.reset();
+            // 使用EmailJS发送邮件
+            emailjs.send('service_w3ycb42', 'template_9jp541u', {
+                to_email: 'happy_games@vip.qq.com',
+                from_name: data.name,
+                class: data.class,
+                gender: data.gender === 'male' ? '男' : '女',
+                age: data.age,
+                major: data.major,
+                phone: data.phone,
+                email: data.email,
+                skills: data.skills,
+                computer_skills: data.computerSkills,
+                awards: data.awards || '无',
+                projects: data.projects || '无'
+            })
+            .then(function() {
+                // 显示成功消息
+                document.getElementById('successMessage').style.display = 'block';
+                form.reset();
+            })
+            .catch(function(error) {
+                alert('提交失败，请稍后重试。错误信息：' + error);
+            })
+            .finally(function() {
+                // 恢复按钮状态
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
             
             return false;
         }
