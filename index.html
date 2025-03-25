@@ -330,6 +330,49 @@
             border-radius: 5px;
             border-left: 4px solid #ff0000;
         }
+        .announcement-box {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .announcement-box h3 {
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+        .activities-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .activities-section h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 10px;
+        }
+        .activity-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        .activity-item h4 {
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+        .activity-item p {
+            margin: 5px 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -380,22 +423,30 @@
     <div id="activities" class="page">
         <div class="container">
             <h1>社团活动</h1>
-            <div class="announcement">
+            <div class="announcement-box">
                 <h3>🎉 最新公告</h3>
-                <p>2024年校园电竞大赛即将开始，报名通道已开启！</p>
+                <p>2025年玩创社报名通道已开启！即刻加入我们吧！</p>
             </div>
-            <div class="section">
-                <h2>近期活动</h2>
-                <ul style="list-style: none; margin-top: 20px;">
-                    <li>每周五：游戏交流会</li>
-                    <li>每月第一个周末：月度电竞比赛</li>
-                    <li>每月第二个周末：游戏开发工作坊</li>
-                    <li>每月第三个周末：直播技术培训</li>
-                </ul>
+            <div class="activities-section">
+                <h3>近期活动</h3>
+                <div class="activity-item">
+                    <h4>每周二、周三：社团课上课</h4>
+                    <p>地点：广州市工贸技师学院（科教城校区）南4-112</p>
+                    <p>时间：16:40 — 18:00</p>
+                    <p>注：其他时间自由来玩</p>
+                </div>
+                <div class="activity-item">
+                    <h4>每周五：游戏交流会</h4>
+                </div>
+                <div class="activity-item">
+                    <p>其他：如有其他活动会及时发布！感谢您的期待与关注！</p>
+                </div>
             </div>
-            <div class="section">
-                <h2>活动回顾</h2>
-                <p>上个月的电竞比赛圆满结束，共有50支队伍参与，最终"王者战队"获得冠军！</p>
+            <div class="activities-section">
+                <h3>活动回顾</h3>
+                <div class="activity-item">
+                    <p>玩创社祝您2025年新年快乐！</p>
+                </div>
             </div>
         </div>
     </div>
