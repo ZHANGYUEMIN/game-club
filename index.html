@@ -1,33 +1,215 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>游戏社团官网</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: fixed;
+            top: 60px;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #00ff88;
+        }
+        .container {
+            max-width: 1000px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-top: 120px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #00ff88;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.3s;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .button:hover {
+            background: #00cc6a;
+            transform: scale(1.1);
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .feature-box {
+            width: 30%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我们的游戏社团</h1>
-        <nav>
-            <ul>
-                <li><a href="#">首页</a></li>
-                <li><a href="#">关于我们</a></li>
-                <li><a href="#">社团活动</a></li>
-                <li><a href="#">加入我们</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="intro">
-            <h2>探索我们的社团</h2>
+    <header>游戏社团官网</header>
+    <nav>
+        <a href="#" onclick="showPage('home')">首页</a>
+        <a href="#" onclick="showPage('about')">关于我们</a>
+        <a href="#" onclick="showPage('activities')">社团活动</a>
+        <a href="#" onclick="showPage('join')">加入我们</a>
+        <a href="#" onclick="showPage('contact')">联系我们</a>
+    </nav>
+    <div id="home" class="page active">
+        <div class="container">
+            <h1>欢迎来到游戏社团</h1>
             <p>这里是游戏爱好者的天堂，我们有丰富的社团活动和比赛，快来加入我们吧！</p>
-            <button id="join-btn">加入我们</button>
-        </section>
-    </main>
-    <footer>
-        <p>© 2025 游戏社团 | 保留所有权利</p>
-    </footer>
-    <script src="js/main.js"></script>
+            <div class="features">
+                <div class="feature-box">
+                    <h2>电竞比赛</h2>
+                    <p>定期举办各类游戏比赛，展示你的游戏技巧。</p>
+                </div>
+                <div class="feature-box">
+                    <h2>游戏交流</h2>
+                    <p>与志同道合的玩家交流经验，分享游戏心得。</p>
+                </div>
+                <div class="feature-box">
+                    <h2>技术培训</h2>
+                    <p>提供游戏开发、直播技术等专业培训。</p>
+                </div>
+            </div>
+            <a href="#" class="button" onclick="showPage('join')">立即加入</a>
+        </div>
+    </div>
+    <div id="about" class="page">
+        <div class="container">
+            <h1>关于我们</h1>
+            <p>游戏社团成立于2020年，是一个充满活力的游戏爱好者社区。我们致力于为游戏爱好者提供一个交流、学习和展示的平台。</p>
+        </div>
+    </div>
+    <div id="activities" class="page">
+        <div class="container">
+            <h1>社团活动</h1>
+            <p>我们定期举办各类活动：</p>
+            <ul style="list-style: none; margin-top: 20px;">
+                <li>每周游戏交流会</li>
+                <li>月度电竞比赛</li>
+                <li>游戏开发工作坊</li>
+                <li>直播技术培训</li>
+            </ul>
+        </div>
+    </div>
+    <div id="join" class="page">
+        <div class="container">
+            <h1>加入我们</h1>
+            <p>填写以下信息加入社团：</p>
+            <form style="margin-top: 20px; text-align: left;">
+                <div style="margin: 10px 0;">
+                    <label>姓名：</label>
+                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label>学号：</label>
+                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label>联系方式：</label>
+                    <input type="text" style="width: 100%; padding: 8px; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid #00ff88; color: white;">
+                </div>
+                <button type="submit" class="button" style="margin-top: 20px;">提交申请</button>
+            </form>
+        </div>
+    </div>
+    <div id="contact" class="page">
+        <div class="container">
+            <h1>联系我们</h1>
+            <p>邮箱：gameclub@example.com</p>
+            <p>QQ群：123456789</p>
+            <p>微信公众号：游戏社团</p>
+        </div>
+    </div>
+    <footer>版权所有 &copy; 2025 游戏社团</footer>
 </body>
 </html>
