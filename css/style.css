@@ -1,0 +1,864 @@
+/* 游戏社团官网样式表 - 增强版 */
+
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 响应式字体大小 */
+html {
+    font-size: 16px;
+}
+
+/* 大屏幕设备 (1400px+) */
+@media (min-width: 1400px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* 标准电脑屏幕 (1025px-1399px) */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* 平板设备 (768px-1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+/* 大屏手机 (481px-767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* 小屏手机 (320px-480px) */
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+/* 主体样式 */
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* 粒子背景 */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* 基础导航样式 */
+nav {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: fixed;
+    top: 60px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+}
+
+/* ==========  大屏幕设备优化 (1400px+) ========== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1200px;
+        padding: 40px;
+    }
+    
+    nav {
+        gap: 40px;
+        padding: 20px 0;
+    }
+    
+    .features {
+        gap: 30px;
+    }
+    
+    .feature-box {
+        min-width: 350px;
+        padding: 40px;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+    
+    .leaderboard-item {
+        padding: 20px;
+    }
+}
+
+/* ==========  标准电脑屏幕优化 (1025px-1399px) ========== */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .container {
+        max-width: 1000px;
+        padding: 35px;
+    }
+    
+    .features {
+        gap: 25px;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+}
+
+/* ==========  平板设备优化 (768px-1024px) ========== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+        padding: 25px;
+        margin-top: 130px;
+    }
+    
+    nav {
+        gap: 25px;
+        padding: 12px 0;
+        flex-wrap: wrap;
+    }
+    
+    nav a {
+        font-size: 1.1em;
+        padding: 10px 15px;
+    }
+    
+    .features {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .feature-box {
+        min-width: unset;
+        max-width: 100%;
+        padding: 25px;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .member-card {
+        padding: 20px;
+    }
+    
+    form {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        padding: 20px;
+    }
+    
+    .game-tabs {
+        gap: 12px;
+    }
+    
+    .game-tabs button {
+        padding: 10px 18px;
+        font-size: 1em;
+    }
+    
+    .leaderboard-item {
+        padding: 18px;
+    }
+    
+    .rank-number {
+        font-size: 1.4em;
+        width: 45px;
+    }
+    
+    .player-name {
+        font-size: 1.05em;
+    }
+}
+
+/* ==========  大屏手机优化 (481px-767px) ========== */
+@media (min-width: 481px) and (max-width: 767px) {
+    .container {
+        max-width: 95%;
+        padding: 20px;
+        margin-top: 140px;
+    }
+    
+    nav {
+        gap: 15px;
+        padding: 10px 5px;
+        flex-wrap: wrap;
+    }
+    
+    nav a {
+        font-size: 1em;
+        padding: 8px 12px;
+        margin: 2px;
+    }
+    
+    .features {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .feature-box {
+        min-width: unset;
+        padding: 20px;
+    }
+    
+    .members-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .member-card {
+        padding: 18px;
+    }
+    
+    form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .form-group.full-width {
+        grid-column: 1;
+    }
+    
+    .game-tabs {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .game-tabs button {
+        padding: 8px 14px;
+        font-size: 0.95em;
+    }
+    
+    .leaderboard-item {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .rank-number {
+        font-size: 1.6em;
+        width: auto;
+    }
+    
+    .player-info {
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+    
+    .player-stats {
+        align-items: center;
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .achievement-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .achievement-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* ==========  小屏手机优化 (320px-480px) ========== */
+@media (max-width: 480px) {
+    .container {
+        max-width: 98%;
+        padding: 15px;
+        margin-top: 150px;
+    }
+    
+    nav {
+        gap: 8px;
+        padding: 8px 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav a {
+        font-size: 0.9em;
+        padding: 6px 10px;
+        margin: 1px;
+        border-radius: 15px;
+    }
+    
+    .features {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .feature-box {
+        min-width: unset;
+        padding: 15px;
+    }
+    
+    .feature-box h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .members-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .member-card {
+        padding: 15px;
+    }
+    
+    .member-avatar {
+        font-size: 2.5em;
+        height: 60px;
+    }
+    
+    .skill-tag {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+    
+    form {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    input, select, textarea {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    
+    .game-tabs {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .game-tabs button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+        width: 80%;
+        max-width: 200px;
+    }
+    
+         .leaderboard-item {
+         padding: 12px;
+         flex-direction: column;
+         text-align: center;
+         gap: 8px;
+         min-height: 80px;
+         background: rgba(255, 255, 255, 0.05) !important;
+         border: 1px solid rgba(0, 255, 136, 0.2);
+     }
+    
+    .rank-number {
+        font-size: 1.8em;
+        width: auto;
+        margin-bottom: 5px;
+    }
+    
+    .player-info {
+        margin-left: 0;
+        margin-bottom: 8px;
+    }
+    
+    .player-name {
+        font-size: 1em;
+    }
+    
+    .player-stats {
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: center;
+    }
+    
+    .score {
+        font-size: 1em;
+    }
+    
+    .achievement-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+    }
+    
+    .achievement-icon {
+        margin-right: 0;
+        margin-bottom: 8px;
+        font-size: 2em;
+    }
+    
+    .achievement-info h4 {
+        font-size: 1em;
+        margin-bottom: 3px;
+    }
+    
+    .achievement-info p {
+        font-size: 0.9em;
+    }
+    
+         #notification-container {
+         left: 5px;
+         right: 5px;
+         top: 5px;
+         max-width: unset;
+     }
+     
+     #leaderboard {
+         min-height: 300px !important;
+         background: rgba(255, 255, 255, 0.1) !important;
+         border: 1px solid rgba(0, 255, 136, 0.3);
+     }
+    
+    .notification {
+        margin: 0;
+        padding: 12px;
+        font-size: 0.9em;
+    }
+    
+         .notification-title {
+         font-size: 1em;
+     }
+     
+     /* 主题切换器移动端适配 */
+     #theme-switcher {
+         right: 10px;
+         top: 40%;
+     }
+     
+     .theme-toggle-btn {
+         width: 40px;
+         height: 40px;
+     }
+     
+     .theme-toggle-btn span {
+         font-size: 1.2em;
+     }
+     
+     .theme-panel {
+         right: 50px;
+         min-width: 180px;
+         padding: 15px;
+     }
+     
+     .theme-panel h3 {
+         font-size: 1em;
+         margin-bottom: 10px;
+     }
+     
+     .theme-options {
+         gap: 8px;
+     }
+     
+     .theme-option {
+         padding: 8px;
+     }
+     
+     .theme-option span {
+         font-size: 0.8em;
+     }
+}
+
+/* ==========  横屏模式优化 ========== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        margin-top: 100px;
+        padding: 15px;
+    }
+    
+    nav {
+        padding: 8px 0;
+        gap: 15px;
+    }
+    
+    nav a {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+    
+    header {
+        padding: 10px 0;
+        font-size: 1.4em;
+    }
+    
+    .features {
+        flex-direction: row;
+    }
+    
+    .feature-box {
+        padding: 15px;
+        min-width: 250px;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .member-card {
+        padding: 12px;
+    }
+    
+    .member-avatar {
+        font-size: 2em;
+        height: 50px;
+    }
+    
+    .leaderboard-item {
+        padding: 10px;
+    }
+    
+    .section {
+        margin: 20px 0;
+        padding: 15px;
+    }
+}
+
+/* ==========  超小屏幕设备 (< 320px) ========== */
+@media (max-width: 319px) {
+    html {
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: 10px;
+        margin-top: 160px;
+    }
+    
+    nav a {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+    
+    .feature-box {
+        padding: 12px;
+    }
+    
+    .feature-box h2 {
+        font-size: 1.3em;
+    }
+    
+    .member-card {
+        padding: 12px;
+    }
+    
+    .member-avatar {
+        font-size: 2em;
+        height: 50px;
+    }
+    
+    form {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    input, select, textarea {
+        padding: 8px;
+        font-size: 0.85em;
+    }
+    
+    .game-tabs button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+    
+    .leaderboard-item {
+        padding: 10px;
+    }
+    
+    .rank-number {
+        font-size: 1.5em;
+    }
+    
+    .notification {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+}
+
+/* ==========  大屏幕电视/投影 (1920px+) ========== */
+@media (min-width: 1920px) {
+    html {
+        font-size: 20px;
+    }
+    
+    .container {
+        max-width: 1400px;
+        padding: 50px;
+    }
+    
+    nav {
+        gap: 50px;
+        padding: 25px 0;
+    }
+    
+    .features {
+        gap: 40px;
+    }
+    
+    .feature-box {
+        min-width: 400px;
+        padding: 50px;
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+    
+    .member-card {
+        padding: 30px;
+    }
+    
+    .leaderboard-item {
+        padding: 25px;
+    }
+    
+    .notification {
+        padding: 20px;
+        max-width: 400px;
+    }
+}
+
+/* ==========  可访问性增强 ========== */
+/* 为使用键盘导航的用户提供清晰的焦点指示 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #00ff88;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* 为屏幕阅读器隐藏装饰性元素 */
+.member-avatar,
+.achievement-icon,
+.rank-number {
+    user-select: none;
+}
+
+/* 确保文本对比度 */
+@media (prefers-contrast: high) {
+    .player-rank,
+    .achievement-info p,
+    .activity-item p {
+        color: rgba(255, 255, 255, 0.95);
+    }
+}
+
+/* 为喜欢暗色主题的用户优化 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #0a0a1a, #0d1628, #0a2240);
+    }
+    
+    .container {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 防止文本选择干扰交互 */
+.button,
+.game-tabs button,
+.submit-button,
+nav a,
+.notification-close {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 136, 0.7);
+}
+
+/* 动画增强 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(0, 255, 136, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(0, 255, 136, 0.2); }
+}
+
+.container {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.feature-box:nth-child(1) { 
+    animation: slideInLeft 0.8s ease-out;
+    animation-delay: 0.2s; 
+    animation-fill-mode: both;
+}
+.feature-box:nth-child(2) { 
+    animation: fadeInUp 0.8s ease-out;
+    animation-delay: 0.4s; 
+    animation-fill-mode: both;
+}
+.feature-box:nth-child(3) { 
+    animation: slideInRight 0.8s ease-out;
+    animation-delay: 0.6s; 
+    animation-fill-mode: both;
+}
+
+.member-card:hover {
+    animation: glow 2s infinite;
+}
+
+.leaderboard-item.top-three:hover {
+    animation: glow 2s infinite;
+}
+
+/* 按钮增强效果 */
+.button:active {
+    transform: scale(0.95);
+}
+
+/* 无障碍访问改进 */
+.button:focus,
+nav a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+/* 打印样式 */
+@media print {
+    #particles-js,
+    #notification-container,
+    nav,
+    footer {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .container {
+        background: white !important;
+        box-shadow: none !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    body {
+        background: #000;
+    }
+    
+    .container {
+        background: #111;
+        border: 2px solid #00ff88;
+    }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    /* 保留粒子效果，只是减少动画 */
+    #particles-js canvas {
+        animation: none !important;
+    }
+}
