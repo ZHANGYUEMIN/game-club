@@ -565,7 +565,7 @@
         }
         #notification-container {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
             z-index: 2000;
             display: flex;
@@ -1026,6 +1026,504 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* ========== 移动端专用优化 ========== */
+        
+        /* 超小屏手机 (320px - 480px) */
+        @media screen and (max-width: 480px) {
+            /* 通知系统移动端优化 */
+            #notification-container {
+                top: 60px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                padding: 0;
+            }
+            
+            .notification {
+                margin: 0 0 10px 0;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                padding: 12px;
+            }
+            
+            .notification-title {
+                font-size: 0.9rem;
+            }
+            
+            .notification-body {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            /* 导航栏移动端优化 */
+            nav {
+                padding: 0.5rem 1rem;
+                background: rgba(0, 0, 0, 0.95) !important;
+                backdrop-filter: blur(15px);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+                margin: 0 0.2rem;
+                border-radius: 6px;
+                display: inline-block;
+            }
+            
+            /* 主要内容区域适配 */
+            main {
+                padding-top: 70px; /* 为固定导航预留空间 */
+            }
+            
+            .container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .hero {
+                padding: 1.5rem 0.8rem;
+                text-align: center;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 1.6rem;
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin-bottom: 1.2rem;
+                opacity: 0.95;
+            }
+            
+            /* 特性卡片移动端优化 */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+            }
+            
+            .feature-box {
+                padding: 1rem;
+                margin: 0;
+                border-radius: 10px;
+            }
+            
+            .feature-box h3 {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            .feature-box p {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+            
+            /* 活动卡片移动端优化 */
+            .activity-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+            }
+            
+            .activity-card {
+                padding: 1rem;
+                margin: 0;
+                border-radius: 10px;
+            }
+            
+            .activity-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            .activity-card p {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+            
+            /* 表单移动端优化 */
+            .join-form {
+                padding: 1.2rem 0.8rem;
+                margin: 0.5rem;
+                border-radius: 12px;
+            }
+            
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+            
+            .form-group label {
+                font-size: 0.85rem;
+                margin-bottom: 0.3rem;
+                display: block;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px; /* 防止iOS缩放 */
+                padding: 0.7rem;
+                border-radius: 8px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            /* 排行榜移动端优化 */
+            .leaderboard-container {
+                margin: 0.5rem;
+                padding: 0;
+            }
+            
+            .tab-buttons {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                padding: 0 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .tab-button {
+                flex: 1;
+                min-width: 90px;
+                font-size: 0.75rem;
+                padding: 0.5rem 0.3rem;
+                border-radius: 6px;
+            }
+            
+            .leaderboard-table {
+                font-size: 0.75rem;
+                margin: 0;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 0.5rem 0.3rem;
+                text-align: center;
+            }
+            
+            .leaderboard-table th {
+                font-size: 0.7rem;
+                font-weight: bold;
+            }
+            
+            /* 成员卡片移动端优化 */
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+                margin: 1rem 0;
+            }
+            
+            .member-card {
+                padding: 1rem;
+                margin: 0;
+                border-radius: 10px;
+                min-height: auto;
+                width: 100%;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .member-card h3 {
+                font-size: 0.95rem;
+                margin-bottom: 0.4rem;
+            }
+            
+            .member-card p {
+                font-size: 0.8rem;
+                line-height: 1.2;
+                margin-bottom: 0.6rem;
+                flex-grow: 1;
+            }
+            
+            .member-skills {
+                margin-top: 0.5rem;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                justify-content: center;
+            }
+            
+            .skill-tag {
+                font-size: 0.65rem;
+                padding: 0.15rem 0.3rem;
+                margin: 0.1rem;
+                border-radius: 4px;
+            }
+            
+            .member-avatar {
+                font-size: 2.5rem;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 0.8rem;
+            }
+            
+            /* 主题切换器移动端优化 */
+            #theme-switcher {
+                top: auto;
+                bottom: 20px;
+                right: 15px;
+                transform: none;
+            }
+            
+            .theme-toggle-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .theme-panel {
+                bottom: 60px;
+                right: -5px;
+                top: auto;
+                transform: none;
+                width: 280px;
+                padding: 1rem;
+                border-radius: 12px;
+            }
+            
+            .theme-panel.show {
+                transform: translateY(-10px);
+            }
+            
+            .theme-options {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .theme-option {
+                padding: 0.6rem;
+                font-size: 0.75rem;
+                border-radius: 8px;
+            }
+            
+            /* 联系方式移动端优化 */
+            .contact-info {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+            }
+            
+            .contact-item {
+                text-align: center;
+                padding: 1rem 0.5rem;
+                border-radius: 10px;
+            }
+            
+            .contact-item h3 {
+                font-size: 0.95rem;
+                margin-bottom: 0.4rem;
+            }
+            
+            .contact-item p {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            /* QR码移动端优化 */
+            .qr-code {
+                text-align: center;
+                padding: 1rem 0.5rem;
+            }
+            
+            .qr-code img {
+                max-width: 120px;
+                height: auto;
+                border-radius: 8px;
+            }
+            
+            /* 页面容器移动端优化 */
+            .page {
+                min-height: 100vh;
+                width: 100%;
+                overflow-y: auto;
+                padding-bottom: 2rem;
+            }
+            
+            /* 成员页面专项优化 */
+            #members .container {
+                padding-bottom: 3rem;
+                min-height: calc(100vh - 120px);
+            }
+            
+            #members .section {
+                margin-bottom: 2rem;
+            }
+            
+            /* 页脚移动端优化 */
+            footer {
+                padding: 1rem 0.5rem;
+                text-align: center;
+                margin-top: auto;
+            }
+            
+            footer p {
+                font-size: 0.8rem;
+                margin: 0.3rem 0;
+            }
+        }
+        
+        /* 大屏手机 (481px - 767px) */
+        @media screen and (min-width: 481px) and (max-width: 767px) {
+            #notification-container {
+                max-width: 320px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .theme-panel {
+                width: 250px;
+            }
+            
+            .theme-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .tab-button {
+                min-width: 100px;
+                font-size: 0.8rem;
+            }
+            
+            .leaderboard-table {
+                font-size: 0.8rem;
+            }
+            
+            /* 大屏手机成员卡片优化 */
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .member-card {
+                padding: 1.2rem;
+                min-height: auto;
+            }
+            
+            .member-card h3 {
+                font-size: 1rem;
+            }
+            
+            .member-card p {
+                font-size: 0.85rem;
+            }
+            
+            .skill-tag {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.4rem;
+            }
+        }
+        
+        /* 手机横屏优化 */
+        @media screen and (max-width: 767px) and (orientation: landscape) {
+            main {
+                padding-top: 60px;
+            }
+            
+            .hero {
+                padding: 1rem 0.8rem;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+            
+            .features-grid,
+            .activity-grid,
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+            }
+            
+            .theme-panel {
+                bottom: 50px;
+                width: 200px;
+                padding: 0.8rem;
+            }
+            
+            .theme-options {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            #notification-container {
+                top: 10px;
+                right: 10px;
+                left: auto;
+                max-width: 250px;
+            }
+        }
+        
+        /* 防止用户缩放导致的布局问题 */
+        @media screen and (max-width: 767px) {
+            html {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+            
+            /* 优化触摸目标大小 */
+            nav a, .btn, .tab-button, .theme-option {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* 优化滚动体验 */
+            body {
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+            }
+            
+            /* 隐藏不必要的装饰效果 */
+            .scan-lines::before {
+                display: none;
+            }
+            
+            body::after {
+                display: none;
+            }
+            
+            .container::before {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="scan-lines">
@@ -1316,33 +1814,49 @@
         function initParticles() {
             const isMobile = window.innerWidth <= 768;
             const isSmallMobile = window.innerWidth <= 480;
+            const isTinyMobile = window.innerWidth <= 320;
+            
+            // 根据设备性能调整粒子数量
+            let particleCount;
+            if (isTinyMobile) {
+                particleCount = 15; // 极小屏幕最少粒子
+            } else if (isSmallMobile) {
+                particleCount = 25; // 小屏手机
+            } else if (isMobile) {
+                particleCount = 40; // 平板/大屏手机
+            } else {
+                particleCount = 80; // 桌面设备
+            }
             
             particlesJS('particles-js', {
                 particles: {
                     number: { 
-                        value: isSmallMobile ? 30 : isMobile ? 50 : 80, 
-                        density: { enable: true, value_area: 800 } 
+                        value: particleCount, 
+                        density: { 
+                            enable: true, 
+                            value_area: isMobile ? 1200 : 800 
+                        } 
                     },
                     color: { value: '#00ff88' },
                     shape: { type: 'circle' },
                     opacity: { 
-                        value: isSmallMobile ? 0.3 : isMobile ? 0.4 : 0.5, 
+                        value: isTinyMobile ? 0.2 : isSmallMobile ? 0.3 : isMobile ? 0.4 : 0.5, 
                         random: false 
                     },
                     size: { 
-                        value: isSmallMobile ? 2 : 3, 
+                        value: isMobile ? 2 : 3, 
                         random: true 
                     },
                     line_linked: {
-                        enable: !isSmallMobile,
-                        distance: isMobile ? 100 : 150,
+                        enable: !isSmallMobile, // 小屏手机禁用连线
+                        distance: isMobile ? 80 : 150,
                         color: '#00ff88',
-                        opacity: isMobile ? 0.3 : 0.4,
-                        width: 1
+                        opacity: isMobile ? 0.2 : 0.4,
+                        width: isMobile ? 0.5 : 1
                     },
                     move: {
                         enable: true,
-                        speed: isSmallMobile ? 3 : isMobile ? 4 : 6,
+                        speed: isTinyMobile ? 1 : isSmallMobile ? 2 : isMobile ? 3 : 6,
                         direction: 'none',
                         random: false,
                         straight: false,
@@ -1354,26 +1868,26 @@
                     detect_on: 'canvas',
                     events: {
                         onhover: { 
-                            enable: !isSmallMobile, 
+                            enable: !isMobile, // 移动设备完全禁用悬停
                             mode: 'repulse' 
                         },
                         onclick: { 
-                            enable: true, 
+                            enable: !isTinyMobile, // 极小屏幕禁用点击效果
                             mode: 'push' 
                         },
                         resize: true
                     },
                     modes: {
                         repulse: {
-                            distance: isMobile ? 50 : 100,
-                            duration: 0.4
+                            distance: isMobile ? 30 : 100,
+                            duration: 0.3
                         },
                         push: {
-                            particles_nb: isMobile ? 2 : 4
+                            particles_nb: isMobile ? 1 : 4
                         }
                     }
                 },
-                retina_detect: true
+                retina_detect: !isMobile // 移动设备关闭高DPI检测
             });
         }
 
@@ -1571,6 +2085,22 @@
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             
+            // 移动端调整通知样式
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            
+            if (isMobile) {
+                // 移动端缩短消息长度
+                if (message.length > 50 && isSmallMobile) {
+                    message = message.substring(0, 47) + '...';
+                } else if (message.length > 80 && isMobile) {
+                    message = message.substring(0, 77) + '...';
+                }
+                
+                // 移动端缩短显示时间
+                duration = Math.min(duration, 4000);
+            }
+            
             notification.innerHTML = `
                 <div class="notification-header">
                     <div class="notification-title">${title}</div>
@@ -1586,9 +2116,20 @@
                 notification.classList.add('show');
             }, 100);
             
+            // 移动端限制同时显示的通知数量
+            if (isMobile) {
+                const notifications = container.querySelectorAll('.notification');
+                if (notifications.length > 2) {
+                    // 移除最老的通知
+                    closeNotification(notifications[0].querySelector('.notification-close'));
+                }
+            }
+            
             // 自动关闭
             setTimeout(() => {
-                closeNotification(notification.querySelector('.notification-close'));
+                if (notification.parentNode) {
+                    closeNotification(notification.querySelector('.notification-close'));
+                }
             }, duration);
         }
 
@@ -1676,18 +2217,20 @@
 
         // 性能优化：预加载关键资源
         function preloadResources() {
-            const resources = [
-                'css/style.css',
-                'assets/qr-code.png'
+            // 只预加载CSS，图片延迟加载
+            const criticalResources = [
+                'css/style.css'
             ];
             
-            resources.forEach(resource => {
+            criticalResources.forEach(resource => {
                 const link = document.createElement('link');
                 link.rel = 'preload';
                 link.href = resource;
-                link.as = resource.endsWith('.css') ? 'style' : 'image';
+                link.as = 'style';
                 document.head.appendChild(link);
             });
+            
+            // 图片使用懒加载，不需要预加载
         }
 
         // 图片懒加载
@@ -1733,10 +2276,60 @@
                 if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
                     // 慢速网络时减少粒子数量
                     if (window.pJSDom && window.pJSDom[0]) {
-                        window.pJSDom[0].pJS.particles.number.value = 20;
+                        window.pJSDom[0].pJS.particles.number.value = 10;
                         window.pJSDom[0].pJS.fn.particlesRefresh();
                     }
+                    
+                    // 禁用部分动画效果
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @media (max-width: 767px) {
+                            * {
+                                animation-duration: 0.1s !important;
+                                transition-duration: 0.1s !important;
+                            }
+                            .scan-lines::before,
+                            body::after,
+                            .container::before {
+                                display: none !important;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
                 }
+            }
+        }
+
+        // 移动端触摸优化
+        function setupMobileOptimizations() {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // 防止移动端滚动弹性
+                document.body.style.overflow = 'auto';
+                document.body.style.overscrollBehavior = 'none';
+                
+                // 优化触摸反馈
+                document.addEventListener('touchstart', function() {}, { passive: true });
+                
+                // 处理移动端viewport
+                let viewportMeta = document.querySelector('meta[name="viewport"]');
+                if (!viewportMeta) {
+                    viewportMeta = document.createElement('meta');
+                    viewportMeta.name = 'viewport';
+                    document.head.appendChild(viewportMeta);
+                }
+                viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+                
+                // 移动端主题面板触摸关闭
+                document.addEventListener('touchstart', function(e) {
+                    const themePanel = document.getElementById('themePanel');
+                    if (themePanel && isThemePanelOpen) {
+                        if (!themePanel.contains(e.target) && !e.target.closest('.theme-toggle-btn')) {
+                            toggleThemePanel();
+                        }
+                    }
+                });
             }
         }
 
@@ -1744,6 +2337,7 @@
         preloadResources();
         setTimeout(setupLazyLoading, 100);
         setTimeout(adaptToConnection, 2000);
+        setupMobileOptimizations();
 
         // 备用加载方案
         window.onload = function() {

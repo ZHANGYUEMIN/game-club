@@ -171,9 +171,9 @@ nav {
     }
     
     .member-card {
-        padding: 20px;
-    }
-    
+    padding: 20px;
+}
+
     form {
         grid-template-columns: repeat(2, 1fr);
         gap: 18px;
